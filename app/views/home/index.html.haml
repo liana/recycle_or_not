@@ -1,4 +1,10 @@
-%h3
-  = "Welcome, #{current_user.name}"
-%p
-  Let's play!
+- unless current_user.present?
+  %h3
+    = "Welcome!"
+  %p
+    Please log in or sign up to play!
+- else
+  %h3
+    = "Welcome, #{current_user.name}"
+  %p
+    Let's play!

@@ -1,4 +1,7 @@
 RecycleOrNot::Application.routes.draw do
+  resources :materials
+
+
   authenticated :user do
     root :to => 'home#index'
   end

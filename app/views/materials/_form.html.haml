@@ -1,0 +1,11 @@
+= simple_form_for(@material) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :image
+    = f.input :bin
+    = f.input :score
+
+  .form-actions
+    = f.button :submit
