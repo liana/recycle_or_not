@@ -1,25 +1,23 @@
-%h1 Listing materials
-
-%table
-  %tr
-    %th Name
-    %th Image
-    %th Bin
-    %th Score
-    %th
-    %th
-    %th
-
-  - @materials.each do |material|
-    %tr
-      %td= material.name
-      %td= material.image
-      %td= material.bin
-      %td= material.score
-      %td= link_to 'Show', material
-      %td= link_to 'Edit', edit_material_path(material)
-      %td= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
+%h3 Materials
 
 = link_to 'New Material', new_material_path
+%br
+
+.span8
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th Name
+        %th Image
+        %th Bin
+        %th Score
+        %th
+
+    %tbody
+      - @materials.each do |material|
+        %tr
+          %td= link_to(material.name, edit_material_path(material))
+          %td= material.image
+          %td= material.bin
+          %td= material.score
+          %td= link_to 'Delete material', material, method: :delete, :class => 'btn btn-mini', data: { confirm: 'Are you sure?' }
