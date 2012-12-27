@@ -1,10 +1,14 @@
-- unless current_user.present?
+- unless user_signed_in?
   %h3
     = "Welcome!"
   %p
     Please log in or sign up to play!
 - else
-  %h3
-    = "Welcome, #{current_user.name}"
-  %p
-    Let's play!
+  - if @material.present?
+    %h3
+      = "Welcome, #{current_user.name}"
+    %p
+      = link_to "Let's play!", material_url(@material)
+  - else
+    %h3
+      = "Start a new game?"

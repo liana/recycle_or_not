@@ -7,6 +7,7 @@
       = image_tag @material.image_url(:thumb).to_s
     = f.file_field :image, :label => 'Image'
     = f.input :bin, :collection => Material::Bins::ALL
+    = f.input :description, :as => :text, :input_html => { :class => 'span6', :rows => 6 }
     = f.input :score
 
   .form-actions

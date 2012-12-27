@@ -3,7 +3,9 @@ class Material < ActiveRecord::Base
   attr_protected :id
 
   # Associations
-  has_many :users, :through => :score
+  has_and_belongs_to_many :users
+  has_many :scores
+  has_many :users, :through => :scores
 
   # Validations
   validates :name, :presence => true, :length => { :maximum => 255 }
@@ -18,5 +20,12 @@ class Material < ActiveRecord::Base
     COMPOST = 'compost'
     TRASH = 'trash'
     ALL = [PAPER, GLASS, PLASTIC, ALUMINUM, COMPOST, TRASH]
+  end
+
+  # Methods
+  def self.next_for(user)
+    materials = user.materials.empty? ? 0 : user.materials
+
+    where('id NOT IN (?)', materials).order("RANDOM()").first
   end
 end

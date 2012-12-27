@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227202245) do
+ActiveRecord::Schema.define(:version => 20121227212816) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -21,13 +21,16 @@ ActiveRecord::Schema.define(:version => 20121227202245) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "games", ["user_id"], :name => "index_games_on_user_id"
+
   create_table "materials", :force => true do |t|
     t.string   "name"
     t.string   "image"
     t.string   "bin"
     t.integer  "score"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "roles", :force => true do |t|
@@ -47,6 +50,16 @@ ActiveRecord::Schema.define(:version => 20121227202245) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "scores", ["material_id"], :name => "index_scores_on_material_id"
+  add_index "scores", ["user_id"], :name => "index_scores_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
