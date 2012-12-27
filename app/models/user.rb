@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+
+  # Validations
+  validates :name, :presence => true, :length => { :maximum => 255 }
+  validates_email_format_of :email # via gem
 end

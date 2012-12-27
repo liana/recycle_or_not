@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Material do
-
   subject{ Material.new }
 
   # Validations
