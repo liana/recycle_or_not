@@ -1,9 +1,11 @@
-= simple_form_for(@material) do |f|
+= simple_form_for @material, :html => {:multipart => true} do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
-    = f.input :image
+    - if @material.image.present?
+      = image_tag @material.image_url(:thumb).to_s
+    = f.file_field :image, :label => 'Image'
     = f.input :bin
     = f.input :score
 
