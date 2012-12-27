@@ -1,18 +1,6 @@
 %p#notice= notice
 
 %p
-  %b Name:
-  = @material.name
-%p
-  %b Image:
-  = @material.image
-%p
-  %b Bin:
-  = @material.bin
-%p
-  %b Score:
-  = @material.score
+  = image_tag @material.image_url(:thumb).to_s
 
-= link_to 'Edit', edit_material_path(@material)
-\|
-= link_to 'Back', materials_path
+= link_to 'Next', material_path(@next_material)

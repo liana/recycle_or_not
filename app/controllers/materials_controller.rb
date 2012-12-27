@@ -7,6 +7,7 @@ class MaterialsController < ApplicationController
   end
 
   def show
+    @next_material = Material.next_for(current_user)
   end
 
   def new

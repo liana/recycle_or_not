@@ -12,7 +12,6 @@ describe Material do
   it { should validate_numericality_of(:score) }
 
   # Methods
-
   describe 'next_for' do
     before do
       @user = FactoryGirl.create(:user)
