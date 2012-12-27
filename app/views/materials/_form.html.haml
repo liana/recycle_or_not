@@ -6,7 +6,7 @@
     - if @material.image.present?
       = image_tag @material.image_url(:thumb).to_s
     = f.file_field :image, :label => 'Image'
-    = f.input :bin
+    = f.input :bin, :collection => Material::Bins::ALL
     = f.input :score
 
   .form-actions

@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe MaterialsController do
   before :each do
-    @material = FactoryGirl.create(:material)
-    @attr = FactoryGirl.attributes_for(:material)
-    @user = FactoryGirl.create(:admin)
-    sign_in @user
+    @admin = FactoryGirl.create(:admin)
+    sign_in @admin
   end
 
   describe 'a GET to #index' do
@@ -26,6 +24,7 @@ describe MaterialsController do
 
   describe 'a GET to #edit' do
     before :each do
+      @material = FactoryGirl.create(:material)
       Material.stub(:find).and_return(@material)
       Material.should_receive(:find)
     end
@@ -38,9 +37,10 @@ describe MaterialsController do
   end
 
 
-  describe "POST create" do
+  describe "a POST to #create" do
     describe 'a POST to #create with valid attributes' do
       before :each do
+        @attr = FactoryGirl.attributes_for(:material)
         @material = Material.new
         Material.stub(:new).and_return @material
         @material.stub(:save).and_return true
@@ -48,7 +48,7 @@ describe MaterialsController do
       end
 
       it 'should redirect to the material index' do
-        post :create, :material => FactoryGirl.attributes_for(:material)
+        post :create, :material => @attr
 
         should redirect_to(materials_url)
       end
@@ -71,9 +71,10 @@ describe MaterialsController do
     end
   end
 
-  describe "PUT update" do
+  describe "a PUT to #update" do
     describe 'a POST to #update with valid attributes' do
       before :each do
+        @attr = FactoryGirl.attributes_for(:material)
         @material = FactoryGirl.create(:material)
         Material.stub(:find).and_return @material
         @material.stub(:update_attributes).and_return true
@@ -81,7 +82,7 @@ describe MaterialsController do
       end
 
       it 'should redirect to the material index' do
-        post :update, :id => @material, :material => FactoryGirl.attributes_for(:material)
+        post :update, :id => @material, :material => @attr
 
         should redirect_to(materials_url)
       end
@@ -106,6 +107,7 @@ describe MaterialsController do
 
   describe 'a PUT to #destroy' do
     before :each do
+      @material = FactoryGirl.create(:material)
       Material.stub(:find).and_return(@material)
       @material.should_receive(:destroy)
     end

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe HomeController do
-  describe "GET 'index'" do
-    it "should be successful" do
-      get 'index'
-      response.should be_success
+  describe 'a GET to #index' do
+    it 'should return :success' do
+      get :index
+
+      should respond_with(:success)
     end
   end
-
 end
