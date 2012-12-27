@@ -1,8 +1,8 @@
 class MaterialsController < ApplicationController
-  before_filter :find_material, :except => [:index, :new, :create]
+  load_and_authorize_resource
+  skip_authorize_resource :only => :show
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @materials = Material.all
   end
 
@@ -10,16 +10,13 @@ class MaterialsController < ApplicationController
   end
 
   def new
-    authorize! :new, @user, :message => 'Not authorized as an administrator.'
     @material = Material.new
   end
 
   def edit
-    authorize! :edit, @user, :message => 'Not authorized as an administrator.'
   end
 
   def create
-    authorize! :create, @user, :message => 'Not authorized as an administrator.'
     @material = Material.new(params[:material])
 
     if @material.save
@@ -31,8 +28,6 @@ class MaterialsController < ApplicationController
   end
 
   def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
-
     if @material.update_attributes(params[:material], :as => :admin)
       redirect_to materials_url, notice: 'Material was successfully updated.'
     else
@@ -41,14 +36,7 @@ class MaterialsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     @material.destroy
     redirect_to materials_url
-  end
-
-  private
-
-  def find_material
-    @material = Material.find(params[:id])
   end
 end
