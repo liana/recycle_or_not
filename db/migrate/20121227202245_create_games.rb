@@ -1,5 +1,5 @@
 class CreateGames < ActiveRecord::Migration
-  def change
+  def up
     create_table :games do |t|
       t.integer :user_id
       t.integer :final_score
@@ -7,5 +7,9 @@ class CreateGames < ActiveRecord::Migration
 
       t.timestamps
     end
+  end
+
+  def down
+    drop_table :games
   end
 end

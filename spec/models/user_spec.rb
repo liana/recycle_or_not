@@ -3,6 +3,10 @@ require 'spec_helper'
 describe User do
   subject{ User.new }
 
+  # Associations
+  it should { have_many(:games).dependent(:destroy) }
+  it should { have_many :materials, :through => :score }
+
   # Validations
   it { should validate_presence_of(:name) }
 

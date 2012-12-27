@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Game do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject{ Game.new }
+
+  # Associations
+  it should { belong_to :user }
+
+  # Validations
+  it { should validate_presence_of(:user) }
 end

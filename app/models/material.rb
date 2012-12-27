@@ -2,6 +2,9 @@ class Material < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   attr_protected :id
 
+  # Associations
+  has_many :users, :through => :score
+
   # Validations
   validates :name, :presence => true, :length => { :maximum => 255 }
   validates :bin, :presence => true, :length => { :maximum => 255 }

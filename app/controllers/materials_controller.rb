@@ -20,7 +20,7 @@ class MaterialsController < ApplicationController
     @material = Material.new(params[:material])
 
     if @material.save
-      redirect_to materials_url, notice: 'Badge was successfully created.'
+      redirect_to materials_url, :notice => 'Material was successfully created.'
     else
       flash.now[:error] = @material.errors.full_messages.join(', ')
       render :new
@@ -29,9 +29,9 @@ class MaterialsController < ApplicationController
 
   def update
     if @material.update_attributes(params[:material], :as => :admin)
-      redirect_to materials_url, notice: 'Material was successfully updated.'
+      redirect_to materials_url, :notice => 'Material was successfully updated.'
     else
-      render action: "edit"
+      render :action => :edit
     end
   end
 

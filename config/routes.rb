@@ -1,6 +1,5 @@
 RecycleOrNot::Application.routes.draw do
-  resources :games
-
+  resources :games, :only => :index
 
   resources :materials
 

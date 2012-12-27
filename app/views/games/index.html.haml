@@ -1,23 +1,16 @@
-%h1 Listing games
+%h3 Games
 
-%table
-  %tr
-    %th User
-    %th Final score
-    %th Completed at
-    %th
-    %th
-    %th
+.span8
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th User
+        %th Final score
+        %th Completed
 
-  - @games.each do |game|
-    %tr
-      %td= game.user_id
-      %td= game.final_score
-      %td= game.completed_at
-      %td= link_to 'Show', game
-      %td= link_to 'Edit', edit_game_path(game)
-      %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Game', new_game_path
+    %tbody
+      - @games.each do |game|
+        %tr
+          %td= game.user.name
+          %td= game.final_score
+          %td= game.completed_at

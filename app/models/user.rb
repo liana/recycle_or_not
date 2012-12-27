@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  # Associations
+  has_many :games, :dependent => :destroy
+  has_many :materials, :through => :score
+
   # Validations
   validates :name, :presence => true, :length => { :maximum => 255 }
   validates_email_format_of :email # via gem
