@@ -1,4 +1,7 @@
 RecycleOrNot::Application.routes.draw do
+  resources :games
+
+
   resources :materials
 
   authenticated :user do
