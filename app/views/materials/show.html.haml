@@ -3,4 +3,17 @@
 %p
   = image_tag @material.image_url(:thumb).to_s
 
-= link_to 'Next', material_path(@next_material)
+.span8
+  %table.table.table-condensed.bottom
+    %thead
+      %tr
+        %th
+          = link_to image_tag('recycle-cans-only.jpg'), material_path(@next_material)
+        %th
+          = link_to image_tag('recycle-glass-only.jpg'), material_path(@next_material)
+        %th
+          = link_to image_tag('recycle-plastic-only.jpg'), material_path(@next_material)
+        %th
+          = link_to image_tag('recycle-paper-only.jpg'), material_path(@next_material)
+        %th
+          = link_to image_tag('trash.png'), material_path(@next_material)
