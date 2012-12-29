@@ -1,19 +1,16 @@
 %p#notice= notice
 
-%p
+%div.photo
   = image_tag @material.image_url(:thumb).to_s
+%div.description
+  = "Sorry, try again.  #{@material.description}"
 
 .span8
   %table.table.table-condensed.bottom
     %thead
       %tr
-        %th
-          = link_to image_tag('recycle-cans-only.jpg'), material_path(@next_material)
-        %th
-          = link_to image_tag('recycle-glass-only.jpg'), material_path(@next_material)
-        %th
-          = link_to image_tag('recycle-plastic-only.jpg'), material_path(@next_material)
-        %th
-          = link_to image_tag('recycle-paper-only.jpg'), material_path(@next_material)
-        %th
-          = link_to image_tag('trash.png'), material_path(@next_material)
+        - Material::Bins::ALL.each do |bin|
+          - winner = (bin == @material.bin)
+          - wrong_answer = winner ? '' : 'wrong'
+          %th
+            = link_to(image_tag("#{bin}.jpg"), @path, :class => wrong_answer, :remote => !winner, :"data-description" => @material.description)

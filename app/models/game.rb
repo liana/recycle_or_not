@@ -9,4 +9,13 @@ class Game < ActiveRecord::Base
 
   # Scopes
   scope :completed, where('completed_at IS NOT NULL')
+  scope :current, where(:completed_at => nil)
+
+  def complete!
+    self.update_attributes(
+      :completed_at => Time.now,
+      :final_score => self.user.materials.sum(:score)
+    )
+    self.user.materials.destroy_all
+  end
 end

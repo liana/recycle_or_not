@@ -1,0 +1,14 @@
+.span8
+  %table.table.table-condensed
+    %thead
+      %tr
+        %th User
+        %th Final score
+        %th Completed
+
+    %tbody
+      - @games.each do |game|
+        %tr
+          %td= game.user.name
+          %td= game.final_score
+          %td= game.completed_at

@@ -16,10 +16,10 @@ class Material < ActiveRecord::Base
     PAPER = 'paper'
     GLASS = 'glass'
     PLASTIC = 'plastic'
-    ALUMINUM = 'aluminum'
+    CAN = 'can'
     COMPOST = 'compost'
     TRASH = 'trash'
-    ALL = [PAPER, GLASS, PLASTIC, ALUMINUM, COMPOST, TRASH]
+    ALL = [CAN, COMPOST, GLASS, PAPER, PLASTIC, TRASH]
   end
 
   # Methods

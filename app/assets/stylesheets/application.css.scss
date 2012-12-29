@@ -24,10 +24,23 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
+/* tables */
 .bottom {
   left:0;
   position:fixed;
   text-align:center;
   bottom:0;
   width:100%;
+}
+
+/* divs */
+.photo {
+  float:left;
+  padding:20px;
+}
+
+.description {
+  float:left;
+  padding:20px;
+  display:none;
 }

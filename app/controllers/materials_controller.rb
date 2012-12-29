@@ -1,13 +1,19 @@
 class MaterialsController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => :show
+  before_filter :add_to_score, :only => :show
 
   def index
     @materials = Material.all
   end
 
   def show
-    @next_material = Material.next_for(current_user)
+    @path = if current_user.game_completed?
+      root_path
+    else
+      @next_material = Material.next_for(current_user)
+      material_path(@next_material, :last_id => @material.id)
+    end
   end
 
   def new
@@ -39,5 +45,13 @@ class MaterialsController < ApplicationController
   def destroy
     @material.destroy
     redirect_to materials_url
+  end
+
+  private
+
+  def add_to_score
+    if params[:last_id].present?
+      current_user.materials << Material.find(params[:last_id])
+    end
   end
 end

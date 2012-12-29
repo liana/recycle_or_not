@@ -4,11 +4,12 @@
   %p
     Please log in or sign up to play!
 - else
-  - if @material.present?
-    %h3
-      = "Welcome, #{current_user.name}"
-    %p
-      = link_to "Let's play!", material_url(@material)
-  - else
-    %h3
-      = "Start a new game?"
+  %h3
+    = "Welcome, #{current_user.name}"
+  %p
+    = link_to "Let's play!", material_url(@material)
+
+  %h3
+    = "All Games"
+  %p
+    = render 'games/games'

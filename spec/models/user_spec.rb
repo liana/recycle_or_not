@@ -10,6 +10,49 @@ describe User do
   # Validations
   it { should validate_presence_of(:name) }
 
+  # Methods
+  describe 'current game' do
+    before :each do
+      @user = FactoryGirl.create(:user)
+      red_herring, @game = [Time.now, nil].collect do |time|
+        FactoryGirl.create(:game, :user => @user, :completed_at => time)
+      end
+    end
+
+    describe 'game reset' do
+      before(:each){ @user.game_reset! }
+
+      it 'should complete the current game and start a new one' do
+        completed_game = @game.reload
+
+        completed_game.completed_at.should_not be_nil
+        completed_game.final_score.should_not be_nil
+      end
+    end
+
+    describe 'current game' do
+      it 'should be the last game not completed' do
+        @user.current_game.should == @game
+      end
+    end
+
+    describe 'completed games' do
+      describe 'when the user has less than MAX ROUNDS materials' do
+        before(:each){ @materials = FactoryGirl.create_list(:material, User::MAX_ROUNDS) }
+
+        it 'should return false' do
+          @user.game_completed?.should be_false
+        end
+
+        it 'should return true' do
+          @user.materials << @materials
+
+          @user.game_completed?.should be_true
+        end
+      end
+    end
+  end
+
   # Behavior
   describe 'email and passwords' do
     before(:each) do
