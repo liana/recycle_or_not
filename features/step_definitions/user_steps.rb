@@ -22,12 +22,17 @@ def create_user
   @user = FactoryGirl.create(:user, email: @visitor[:email])
 end
 
+def create_material
+  @material = FactoryGirl.create(:material)
+end
+
 def delete_user
   @user ||= User.first conditions: {:email => @visitor[:email]}
   @user.destroy unless @user.nil?
 end
 
 def sign_up
+  create_material
   delete_user
   visit '/users/sign_up'
   fill_in "Name", :with => @visitor[:name]
@@ -39,6 +44,7 @@ def sign_up
 end
 
 def sign_in
+  create_material
   visit '/users/sign_in'
   fill_in "Email", :with => @visitor[:email]
   fill_in "Password", :with => @visitor[:password]
