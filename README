@@ -1,5 +1,6 @@
 Recycle Or Not
 ========================
+This application was deployed to heroku and is available at http://evening-oasis-4337.herokuapp.com/
 
 This application was generated with the rails_apps_composer gem:
 https://github.com/RailsApps/rails_apps_composer
