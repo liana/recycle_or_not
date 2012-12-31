@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   def game_reset!
     if current_game.present?
-      current_game.complete! if game_completed?
+      current_game.complete!
     else
       self.games.create
     end
