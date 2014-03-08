@@ -9,6 +9,7 @@ class MaterialsController < ApplicationController
 
   def show
     @path = if current_user.game_completed?
+      current_user.game_reset!
       root_path
     else
       @next_material = Material.next_for(current_user)
